@@ -15,7 +15,7 @@
         "execute": {
             "inArguments": [],
             "outArguments": [],
-            "url": "https://postgrid-custom-repository.vercel.app/execute",
+            "url": "https://github.com/Kritika199/PostgridCustomRepository.git/execute",
             "verb": "POST",
             "body": "",
             "header": "",
@@ -26,17 +26,17 @@
     },
     "configurationArguments": {
         "publish": {
-            "url": "https://postgrid-custom-repository.vercel.app/publish",
+            "url": "https://github.com/Kritika199/PostgridCustomRepository.git/publish",
             "verb": "POST",
             "useJwt": false
         },
         "validate": {
-            "url": "https://postgrid-custom-repository.vercel.app/validate",
+            "url": "https://github.com/Kritika199/PostgridCustomRepository.git/validate",
             "verb": "POST",
             "useJwt": false
         },
         "stop": {
-            "url": "https://postgrid-custom-repository.vercel.app/stop",
+            "url": "https://github.com/Kritika199/PostgridCustomRepository.git/stop",
             "verb": "POST",
             "useJwt": false
         }
