@@ -11,4 +11,36 @@
             "description": "A custom activity for Postgrid"
         }
     },
+    "arguments": {
+        "execute": {
+            "inArguments": [],
+            "outArguments": [],
+            "url": "https://postgrid-custom-repository-lime.vercel.app/execute",
+            "verb": "POST",
+            "body": "",
+            "header": "",
+            "format": "json",
+            "useJwt": false,
+            "timeout": 10000
+        }
+    },
+    "configurationArguments": {
+        "applicationExtensionKey": "e4d85ddc-5a86-4265-8a03-733efbe2ee9d",
+        "publish": {
+            "url": "https://postgrid-custom-repository-lime.vercel.app/publish",
+            "verb": "POST",
+            "useJwt": false
+        },
+        "validate": {
+            "url": "https://postgrid-custom-repository-lime.vercel.app/validate",
+            "verb": "POST",
+            "useJwt": false
+        },
+        "stop": {
+            "url": "https://postgrid-custom-repository-lime.vercel.app/stop",
+            "verb": "POST",
+            "useJwt": false
+        }
+    },
+    
    
