@@ -25,6 +25,7 @@
         }
     },
     "configurationArguments": {
+        "applicationExtensionKey": "e4d85ddc-5a86-4265-8a03-733efbe2ee9d",
         "publish": {
             "url": "https://postgrid-custom-repository-ix2q.vercel.app/publish",
             "verb": "POST",
