@@ -42,5 +42,23 @@
             "useJwt": false
         }
     },
+    "userInterfaces": {
+        "configModal": {
+            "url": "https://postgrid-custom-repository-ix2q.vercel.app/config.html",
+            "height": 400,
+            "width": 600
+        },
+        "editModal": {
+            "url": "https://postgrid-custom-repository-ix2q.vercel.app/edit.html",
+            "height": 400,
+            "width": 600
+        },
+        "summary": {
+            "url": "https://postgrid-custom-repository-ix2q.vercel.app/summary.html",
+            "height": 200,
+            "width": 300
+        }
+    }
+}
     
    
