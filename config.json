@@ -15,7 +15,7 @@
         "execute": {
             "inArguments": [],
             "outArguments": [],
-            "url": "https://postgrid-custom-repository-lime.vercel.app/execute",
+            "url": "https://postgrid-custom-repository.vercel.app/execute",
             "verb": "POST",
             "body": "",
             "header": "",
@@ -27,34 +27,34 @@
     "configurationArguments": {
         "applicationExtensionKey": "e4d85ddc-5a86-4265-8a03-733efbe2ee9d",
         "publish": {
-            "url": "https://postgrid-custom-repository-lime.vercel.app/publish",
+            "url": "https://postgrid-custom-repository.vercel.app/publish",
             "verb": "POST",
             "useJwt": false
         },
         "validate": {
-            "url": "https://postgrid-custom-repository-lime.vercel.app/validate",
+            "url": "https://postgrid-custom-repository.vercel.app/validate",
             "verb": "POST",
             "useJwt": false
         },
         "stop": {
-            "url": "https://postgrid-custom-repository-lime.vercel.app/stop",
+            "url": "https://postgrid-custom-repository.vercel.app/stop",
             "verb": "POST",
             "useJwt": false
         }
     },
     "userInterfaces": {
         "configModal": {
-            "url": "https://postgrid-custom-repository-ix2q.vercel.app/config.html",
+            "url": "https://postgrid-custom-repository.vercel.app/config.html",
             "height": 400,
             "width": 600
         },
         "editModal": {
-            "url": "https://postgrid-custom-repository-ix2q.vercel.app/edit.html",
+            "url": "https://postgrid-custom-repository.vercel.app/edit.html",
             "height": 400,
             "width": 600
         },
         "summary": {
-            "url": "https://postgrid-custom-repository-ix2q.vercel.app/summary.html",
+            "url": "https://postgrid-custom-repository.vercel.app/summary.html",
             "height": 200,
             "width": 300
         }
