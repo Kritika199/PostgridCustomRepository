@@ -15,7 +15,7 @@
         "execute": {
             "inArguments": [],
             "outArguments": [],
-            "url": "https://github.com/Kritika199/PostgridCustomRepository.git/execute",
+            "url": "https://postgrid-custom-repository-ix2q.vercel.app/execute",
             "verb": "POST",
             "body": "",
             "header": "",
@@ -26,34 +26,34 @@
     },
     "configurationArguments": {
         "publish": {
-            "url": "https://github.com/Kritika199/PostgridCustomRepository.git/publish",
+            "url": "https://postgrid-custom-repository-ix2q.vercel.app/publish",
             "verb": "POST",
             "useJwt": false
         },
         "validate": {
-            "url": "https://github.com/Kritika199/PostgridCustomRepository.git/validate",
+            "url": "https://postgrid-custom-repository-ix2q.vercel.app/validate",
             "verb": "POST",
             "useJwt": false
         },
         "stop": {
-            "url": "https://github.com/Kritika199/PostgridCustomRepository.git/stop",
+            "url": "https://postgrid-custom-repository-ix2q.vercel.app/stop",
             "verb": "POST",
             "useJwt": false
         }
     },
     "userInterfaces": {
         "configModal": {
-            "url": "https://postgrid-custom-repository.vercel.app/config.html",
+            "url": "https://postgrid-custom-repository-ix2q.vercel.app/config.html",
             "height": 400,
             "width": 600
         },
         "editModal": {
-            "url": "https://postgrid-custom-repository.vercel.app/edit.html",
+            "url": "https://postgrid-custom-repository-ix2q.vercel.app/edit.html",
             "height": 400,
             "width": 600
         },
         "summary": {
-            "url": "https://postgrid-custom-repository.vercel.app/summary.html",
+            "url": "https://postgrid-custom-repository-ix2q.vercel.app/summary.html",
             "height": 200,
             "width": 300
         }
