@@ -1,8 +1,11 @@
 define(["postmonger"], function (Postmonger) {
-  "use strict";
+    "use strict";
 
-  var connection = new Postmonger.Session();
+    var connection = new Postmonger.Session();
     var payload = {};
+    var eventDefinitionKey = '';
+    var deFields = [];
+
     var steps = [
         {
             id: 'step1',
@@ -78,10 +81,14 @@ define(["postmonger"], function (Postmonger) {
     }
 
     function onClickedNext() {
-        if (currentStep === 'idselection') {
-            save();
-        } else {
-            connection.trigger('nextStep');
+        if (currentStep === 'step1') {
+            saveStep1(); // Save data from step 1
+            connection.trigger('nextStep'); // Move to step 2
+        } else if (currentStep === 'step2') {
+            saveStep2(); // Save data from step 2
+            // Additional logic for proceeding to next step or completing activity
+            // Example:
+            // connection.trigger('nextStep');
         }
     }
 
@@ -94,21 +101,11 @@ define(["postmonger"], function (Postmonger) {
         connection.trigger('ready');
     }
 
-    function showStep(step) {
-        currentStep = step;
+    function showStep(stepId) {
+        currentStep = stepId;
 
         $('.step').hide();
-
-        switch (currentStep.key) {
-            case 'eventdefinitionkey':
-                $('#step1').show();
-                $('#step1 input').focus();
-                break;
-            case 'idselection':
-                $('#step2').show();
-                $('#step2 input').focus();
-                break;
-        }
+        $('#' + currentStep).show();
     }
 
     function requestedInteractionHandler(settings) {
@@ -151,14 +148,13 @@ define(["postmonger"], function (Postmonger) {
         }
     }
 
-    function save() {
+    function saveStep1() {
         payload['arguments'] = payload['arguments'] || {};
         payload['arguments'].execute = payload['arguments'].execute || {};
 
-        var idField = deFields.length > 0 ? $('#select-id-dropdown').val() : $('#select-id').val();
-
         payload['arguments'].execute.inArguments = [{
-            'serviceCloudId': '{{Event.' + eventDefinitionKey + '.\"' + idField + '\"}}'
+            'testApiKey': $('#test-api-key').val(),
+            'liveApiKey': $('#live-api-key').val()
         }];
 
         payload['metaData'] = payload['metaData'] || {};
@@ -169,19 +165,31 @@ define(["postmonger"], function (Postmonger) {
         connection.trigger('updateActivity', payload);
     }
 
-    // Functions to show and hide forms
+    function saveStep2() {
+        payload['arguments'] = payload['arguments'] || {};
+        payload['arguments'].execute = payload['arguments'].execute || {};
+
+        payload['arguments'].execute.inArguments = [{
+            'testMode': $('#test-mode').is(':checked'),
+            'messageType': $('input[name=message-type]:checked').val(),
+            'creationType': $('input[name=creation-type]:checked').val()
+        }];
+
+        payload['metaData'] = payload['metaData'] || {};
+        payload['metaData'].isConfigured = true;
+
+        console.log(JSON.stringify(payload));
+
+        connection.trigger('updateActivity', payload);
+    }
+
+    // Functions to show and hide forms (if applicable)
+    // These can be used if you have specific HTML elements for forms
     window.showSecondForm = function () {
-        document.getElementById('firstForm').style.display = 'none';
-        document.getElementById('secondForm').style.display = 'block';
+        showStep('step2'); // Example if you want to directly show step 2
     };
 
     window.showFirstForm = function () {
-        document.getElementById('firstForm').style.display = 'block';
-        document.getElementById('secondForm').style.display = 'none';
-    };
-
-    window.showThirdForm = function () {
-        document.getElementById('secondForm').style.display = 'none';
-        document.getElementById('thirdForm').style.display = 'block';
+        showStep('step1'); // Example if you want to directly show step 1
     };
 });
