@@ -43,21 +43,17 @@
         }
     },
     "userInterfaces": {
-        "configModal": {
-            "url": "https://postgrid-custom-repository.vercel.app/config.html",
-            "height": 400,
-            "width": 600
-        },
-        "editModal": {
-            "url": "https://postgrid-custom-repository.vercel.app/edit.html",
-            "height": 400,
-            "width": 600
-        },
-        "summary": {
-            "url": "https://postgrid-custom-repository.vercel.app/summary.html",
-            "height": 200,
-            "width": 300
-        }
+    "configModal": {
+        "height": 200,
+        "width": 300
+    },
+    "runningModal": {
+        "url": "runningModal.html"
+    },
+    "runningHover": {
+        "url": "runningHover.html"
+    }
+
     }
 }
     
