@@ -3,130 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Connect Your PostGrid Account</title>
+    <title>Summary</title>
     <script type="text/javascript" src="js/jquery.min.js"></script>
-	<script data-main="js/main.js" type="text/javascript" src="js/require.js"></script>
+    <script data-main="js/main.js" type="text/javascript" src="js/require.js"></script>
     <link rel="stylesheet" href="index.css">
 </head>
 <body>
-    <div class="container" id="formContainer">
-        <!-- First Form -->
-        <div class="modal" id="firstForm">
-            <div class="content">
-                <div class="form-section">
-                    <h3>Connect your PostGrid account</h3>
-                    <label for="test-api-key">Test API Key:</label>
-                    <input type="text" id="test-api-key" name="test-api-key">
-                    <label for="live-api-key">Live API Key:</label>
-                    <input type="text" id="live-api-key" name="live-api-key">
-                </div>
-                <div class="image-section">
-                    <img src="https://t4.ftcdn.net/jpg/03/78/44/41/360_F_378444168_xsV5o5cfrv0QhYSJeEcihMQUoscu5NKt.jpg" alt="Sample Image">
-                </div>
-            </div>
-            <div class="footer">
-                <button class="cancel">Cancel</button>
-                <div class="nav-buttons">
-                    <button class="back">Back</button>
-                    <button class="next" onclick="showSecondForm()">Next</button>
-                </div>
-            </div>
-        </div>
-    <!-- Second Form -->
-    <div class="modal" id="secondForm" style="display: none;">
-        <div class="toggle-switch-container">
-            <label for="test-mode" class="toggle-text">Test Mode:</label>
-            <div class="toggle-switch">
-                <input type="checkbox" id="test-mode" name="test-mode" class="toggle-checkbox">
-                <label for="test-mode" class="toggle-label"></label>
-            </div>
-        </div>
-        <div class="content">
-            <div class="form-section">
-                <div class="labels-column">
-                    <label for="message-type">Message Type:</label>
-                    <div class="radio-group">
-                        <input type="radio" id="letters" name="message-type" value="letters" checked>
-                        <label for="letters">Letters</label>
-                        <input type="radio" id="postcards" name="message-type" value="postcards">
-                        <label for="postcards">Postcards</label>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="labels-column">
-                        <label for="creation-type">Creation Type:</label>
-                        <div class="radio-group">
-                            <input type="radio" id="html" name="creation-type" value="html" checked>
-                            <label for="html">HTML</label>
-                            <input type="radio" id="pdf-upload" name="creation-type" value="pdf-upload">
-                            <label for="pdf-upload">PDF Upload</label>
-                            <input type="radio" id="existing-template" name="creation-type" value="existing-template">
-                            <label for="existing-template">Existing Template</label>
-                            <input type="radio" id="new-template" name="creation-type" value="new-template">
-                            <label for="new-template">New Template</label>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="footer">
-            <button class="cancel">Cancel</button>
-            <div class="nav-buttons">
-                <button class="back" onclick="showFirstForm()">Back</button>
-                <button class="next" onclick="showThirdForm()">Next</button>
-            </div>
+    <div class="container">
+        <h3>Summary of your PostGrid account configuration</h3>
+        <div id="summaryContent">
+            <p><strong>Test API Key:</strong> <span id="summaryTestApiKey"></span></p>
+            <p><strong>Live API Key:</strong> <span id="summaryLiveApiKey"></span></p>
+            <p><strong>Message Type:</strong> <span id="summaryMessageType"></span></p>
+            <p><strong>Creation Type:</strong> <span id="summaryCreationType"></span></p>
         </div>
     </div>
-
-    <!-- third Form -->
-    <div class="modal" id="thirdForm" style="display: none;">
-        <div class="content">
-            <!-- Content of the third form -->
-            <h3>HTML</h3>
-            <form>
-                <div class="form-group">
-                    <label for="description">Description:</label>
-                    <input type="text" class="form-control" id="description" name="description">
-                    <div class="form-group col-md-6">
-                        <label for="send-date">Send Date</label>
-                        <input type="date" class="form-control" id="send-date" name="send-date" value="2024-07-11">
-                    </div>
-                    <div class="form-group col-md-6">
-                        <label for="extra-service">Extra Service</label>
-                        <select class="form-control" id="extra-service" name="extra-service">
-                            <option value="">Select Extra Service</option>
-                            <!-- Add options here -->
-                        </select>
-                    </div>
-                    <div class="form-group col-md-6">
-                        <label for="mailing-class">Mailing Class</label>
-                        <select class="form-control" id="mailing-class" name="mailing-class">
-                            <option value="first-class">First Class (7-10 business days)</option>
-                            <option value="standard-class">Standard Class (10-14 business days)</option>
-                        </select>
-                    </div>
-                    <div class="form-group col-md-6">
-                        <label for="return-envelope">Return Envelope</label>
-                        <select class="form-control" id="return-envelope" name="return-envelope">
-                            <option value="">Select Return Envelope</option>
-                            <!-- Add options here -->
-                        </select>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-group col-md-6">
-                            <label for="envelope-type">Envelope Type</label>
-                            <input type="text" class="form-control" id="envelope-type" name="envelope-type" value="Standard Double Window" readonly>
-                        </div>
-                    </div>
-                </div>
-
-
-                </form>
-            <!-- <button onclick="showFirstForm()">Previous</button>-->
-        </div>
-    </div>
-</div>
     <script src="index.js"></script>
-    </body>
-    </html>
-    
+</body>
+</html>
