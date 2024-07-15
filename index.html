@@ -6,6 +6,17 @@
     <title>Connect Your PostGrid Account</title>
     <script type="text/javascript" src="js/jquery.min.js"></script>
 	<script data-main="js/main.js" type="text/javascript" src="js/require.js"></script>
+	<script type="text/javascript">
+      (function () {
+        var config = {
+          baseUrl: "",
+        };
+
+        var dependencies = ["customActivity"];
+
+        require(config, dependencies);
+      })();
+    </script>
     <link rel="stylesheet" href="index.css">
 </head>
 <body>
