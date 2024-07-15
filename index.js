@@ -1,16 +1,64 @@
-'use strict';
+define(["postmonger"], function (Postmonger) {
+  "use strict";
 
-define(function (require) {
-    var Postmonger = require('postmonger');
-    var connection = new Postmonger.Session();
+  var connection = new Postmonger.Session();
     var payload = {};
     var steps = [
-        {'key': 'eventdefinitionkey', 'label': 'Event Definition Key'},
-        {'key': 'idselection', 'label': 'ID Selection'}
+        {
+            id: 'step1',
+            title: 'Connect your PostGrid account',
+            fields: [
+                {
+                    id: 'test-api-key',
+                    type: 'text',
+                    label: 'Test API Key',
+                    placeholder: 'Enter your test API key',
+                    required: true
+                },
+                {
+                    id: 'live-api-key',
+                    type: 'text',
+                    label: 'Live API Key',
+                    placeholder: 'Enter your live API key',
+                    required: true
+                }
+            ]
+        },
+        {
+            id: 'step2',
+            title: 'Choose message settings',
+            fields: [
+                {
+                    id: 'test-mode',
+                    type: 'checkbox',
+                    label: 'Test Mode',
+                    default: false
+                },
+                {
+                    id: 'message-type',
+                    type: 'radio',
+                    label: 'Message Type',
+                    options: [
+                        { value: 'letters', label: 'Letters', checked: true },
+                        { value: 'postcards', label: 'Postcards', checked: false }
+                    ]
+                },
+                {
+                    id: 'creation-type',
+                    type: 'radio',
+                    label: 'Creation Type',
+                    options: [
+                        { value: 'html', label: 'HTML', checked: true },
+                        { value: 'pdf-upload', label: 'PDF Upload', checked: false },
+                        { value: 'existing-template', label: 'Existing Template', checked: false },
+                        { value: 'new-template', label: 'New Template', checked: false }
+                    ]
+                }
+            ]
+        }
     ];
-    var currentStep = steps[0].key;
-    var eventDefinitionKey = '';
-    var deFields = [];
+
+    var currentStep = steps[0].id; // Initialize currentStep with the first step ID
 
     $(window).ready(function () {
         connection.trigger('ready');
