@@ -16,9 +16,8 @@
         "configModal": {
             "height": 400,
             "width": 700,
-            "fullscreen": true,
-            "nextButtonText": "Next",
-            "backButtonText": "Back",
+            "fullscreen": true
+            
             "steps": [
                 {
                     "id": "step1",
