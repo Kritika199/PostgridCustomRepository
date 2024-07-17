@@ -111,17 +111,17 @@ define(["postmonger"], function(Postmonger) {
 
     switch (currentStep) {
       case "firstForm":
-        $("#step1").show();
+        $("#firstForm").show();
         connection.trigger("updateButton", { button: "next", enabled: Boolean(getMessage()) });
         connection.trigger("updateButton", { button: "back", visible: false });
         break;
       case "secondForm":
-        $("#step2").show();
+        $("#secondForm").show();
         connection.trigger("updateButton", { button: "back", visible: true });
         connection.trigger("updateButton", { button: "next", text: "Next", visible: true });
         break;
       case "thirdForm":
-        $("#step3").show();
+        $("#thirdForm").show();
         connection.trigger("updateButton", {
           button: "back",
           visible: true
