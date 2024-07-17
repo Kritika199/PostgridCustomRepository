@@ -1,57 +1,63 @@
 {
-    "workflowApiVersion": "1.1",
-    "metaData": {
-        "icon": "images/icon.png",
-        "category": "message"
-    },
-    "type": "REST",
-    "lang": {
-        "en-US": {
-            "name": "Custom Activity",
-            "description": "Description of custom activity"
-        }
-    },
-    "arguments": {
-        "execute": {
-            "inArguments": [],
-            "outArguments": [],
-            "url": "https://your-endpoint-url/execute",
-            "verb": "POST",
-            "body": "",
-            "header": "",
-            "format": "json",
-            "useJwt": false,
-            "timeout": 10000
-        }
-    },
-    "configurationArguments": {
-        "publish": {
-            "url": "https://your-endpoint-url/publish",
-            "verb": "POST",
-            "useJwt": false
-        },
-        "validate": {
-            "url": "https://your-endpoint-url/validate",
-            "verb": "POST",
-            "useJwt": false
-        },
-        "stop": {
-            "url": "https://your-endpoint-url/stop",
-            "verb": "POST",
-            "useJwt": false
-        }
-    },
-    "wizardSteps": [
-        { "label": "Connect your PostGrid account", "key": "firstForm" },
-        { "label": "Message Type", "key": "secondForm" },
-        { "label": "HTML", "key": "thirdForm" }
-    ],
-    "userInterfaces": {
-        "configModal": {
-            "height": 400,
-            "width": 600,
-          "fullscreen": true,
-            "url": "https://your-url/config"
-        }
+  "workflowApiVersion": "1.1",
+  "metaData": {
+    "icon": "https://gdm-catalog-fmapi-prod.imgix.net/ProductLogo/35cc11eb-39a9-4dac-948a-24670781c557.png",
+    "category": "message"
+  },
+  "type": "REST",
+  "lang": {
+    "en-US": {
+      "name": "Postgrid Custom Activity",
+      "description": "Description of custom activity"
     }
+  },
+  "arguments": {
+    "execute": {
+      "inArguments": [],
+      "outArguments": [],
+      "url": "https://your-endpoint-url/execute",
+      "verb": "POST",
+      "body": "",
+      "header": "",
+      "format": "json",
+      "useJwt": false,
+      "timeout": 10000
+    }
+  },
+  "configurationArguments": {
+    "publish": {
+      "url": "https://your-endpoint-url/publish",
+      "verb": "POST",
+      "useJwt": false
+    },
+    "validate": {
+      "url": "https://your-endpoint-url/validate",
+      "verb": "POST",
+      "useJwt": false
+    },
+    "stop": {
+      "url": "https://your-endpoint-url/stop",
+      "verb": "POST",
+      "useJwt": false
+    }
+  },
+  "wizardSteps": [
+    { "label": "Connect your PostGrid account", "key": "firstForm" },
+    { "label": "Message Type", "key": "secondForm" },
+    { "label": "HTML", "key": "thirdForm" }
+  ],
+  "userInterfaces": {
+    "configModal": {
+      "height": 400,
+      "width": 600,
+      "fullscreen": true,
+      "url": "https://your-url/config"
+    },
+    "runningModal": {
+      "url": "runningModal.html"
+    },
+    "runningHover": {
+      "url": "runningHover.html"
+    }
+  }
 }
