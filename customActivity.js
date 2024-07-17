@@ -1,141 +1,202 @@
-define(["postmonger"], function(Postmonger) {
-    "use strict";
+define(["postmonger"], function (Postmonger) {
+  "use strict";
 
-    var connection = new Postmonger.Session();
-    var payload = {};
-    var eventDefinitionKey = '';
-    var deFields = {};
+  var connection = new Postmonger.Session();
+  var payload = {};
+  var lastStepEnabled = false;
+  var steps = [
+    // initialize to the same value as what's set in config.json for consistency
+    { label: "Step 1", key: "step1" },
+    { label: "Step 2", key: "step2" },
+    { label: "Step 3", key: "step3" },
+    { label: "Step 4", key: "step4", active: false },
+  ];
+  var currentStep = steps[0].key;
 
-    $(window).ready(function() {
-        connection.trigger('ready');
-        connection.trigger('requestInteraction');
+  $(window).ready(onRender);
+
+  connection.on("initActivity", initialize);
+  connection.on("requestedTokens", onGetTokens);
+  connection.on("requestedEndpoints", onGetEndpoints);
+
+  connection.on("clickedNext", onClickedNext);
+  connection.on("clickedBack", onClickedBack);
+  connection.on("gotoStep", onGotoStep);
+
+  function onRender() {
+    // JB will respond the first time 'ready' is called with 'initActivity'
+    connection.trigger("ready");
+
+    connection.trigger("requestTokens");
+    connection.trigger("requestEndpoints");
+
+    // Disable the next button if a value isn't selected
+    $("#select1").change(function () {
+      var message = getMessage();
+      connection.trigger("updateButton", {
+        button: "next",
+        enabled: Boolean(message),
+      });
+
+      $("#message").html(message);
     });
 
-    connection.on('initActivity', initialize);
-    connection.on('clickedNext', onClickedNext);
-    connection.on('clickedBack', onClickedBack);
-    connection.on('gotoStep', onGotoStep);
-    connection.on('requestedInteraction', requestedInteractionHandler);
+    // Toggle step 4 active/inactive
+    // If inactive, wizard hides it and skips over it during navigation
+    $("#toggleLastStep").click(function () {
+      lastStepEnabled = !lastStepEnabled; // toggle status
+      steps[3].active = !steps[3].active; // toggle active
 
-    function initialize(data) {
-        if (data) {
-            payload = data;
-            console.log('Payload:', payload);
-            initializeForm();
+      connection.trigger("updateSteps", steps);
+    });
+  }
+
+  function initialize(data) {
+    if (data) {
+      payload = data;
+    }
+
+    var message;
+    var hasInArguments = Boolean(
+      payload["arguments"] &&
+        payload["arguments"].execute &&
+        payload["arguments"].execute.inArguments &&
+        payload["arguments"].execute.inArguments.length > 0
+    );
+
+    var inArguments = hasInArguments
+      ? payload["arguments"].execute.inArguments
+      : {};
+
+    $.each(inArguments, function (index, inArgument) {
+      $.each(inArgument, function (key, val) {
+        if (key === "message") {
+          message = val;
         }
+      });
+    });
+
+    // If there is no message selected, disable the next button
+    if (!message) {
+      showStep(null, 1);
+      connection.trigger("updateButton", { button: "next", enabled: false });
+      // If there is a message, skip to the summary step
+    } else {
+      $("#select1")
+        .find("option[value=" + message + "]")
+        .attr("selected", "selected");
+      $("#message").html(message);
+      showStep(null, 3);
+    }
+  }
+
+  function onGetTokens(tokens) {
+    // Response: tokens = { token: <legacy token>, fuel2token: <fuel api token> }
+    // console.log(tokens);
+  }
+
+  function onGetEndpoints(endpoints) {
+    // Response: endpoints = { restHost: <url> } i.e. "rest.s1.qa1.exacttarget.com"
+    // console.log(endpoints);
+  }
+
+  function onClickedNext() {
+    if (
+      (currentStep.key === "step3" && steps[3].active === false) ||
+      currentStep.key === "step4"
+    ) {
+      save();
+    } else {
+      connection.trigger("nextStep");
+    }
+  }
+
+  function onClickedBack() {
+    connection.trigger("prevStep");
+  }
+
+  function onGotoStep(step) {
+    showStep(step);
+    connection.trigger("ready");
+  }
+
+  function showStep(step, stepIndex) {
+    if (stepIndex && !step) {
+      step = steps[stepIndex - 1];
     }
 
-    function initializeForm() {
-        // Populate the form with existing values from payload if needed
-        var inArguments = payload['arguments'] && payload['arguments'].execute && payload['arguments'].execute.inArguments;
-        if (inArguments && inArguments.length > 0) {
-            var args = inArguments[0];
-            $('#firstForm input[name=test-api-key]').val(args.testApiKey);
-            $('#firstForm input[name=live-api-key]').val(args.liveApiKey);
-            $('#firstForm input[name=test-mode]').prop('checked', args.testMode);
-            $('#secondForm input[name=message-type][value=' + args.messageType + ']').prop('checked', true);
-            $('#secondForm input[name=creation-type][value=' + args.creationType + ']').prop('checked', true);
-            $('#secondForm textarea[name=description]').val(args.description);
-            $('#thirdForm input[name=send-date]').val(args.sendDate);
-            $('#thirdForm input[name=extra-service]').val(args.extraService);
-            $('#thirdForm input[name=mailing-class]').val(args.mailingClass);
-            $('#thirdForm input[name=return-envelope]').val(args.returnEnvelope);
-            $('#thirdForm input[name=envelope-type]').val(args.envelopeType);
-        }
-    }
+    currentStep = step;
 
-    function onClickedNext() {
-        save();
-        connection.trigger('nextStep');
-    }
+    $(".step").hide();
 
-    function onClickedBack() {
-        connection.trigger('prevStep');
-    }
-
-    function onGotoStep(step) {
-        showForm(step); // Use showForm function to display the correct form
-        connection.trigger('ready');
-    }
-
-    function showForm(formId) {
-        const formIds = [
-            "firstForm", "secondForm", "thirdForm"
-        ];
-
-        formIds.forEach(id => {
-            document.getElementById(id).style.display = id === formId ? "block" : "none";
+    switch (currentStep.key) {
+      case "step1":
+        $("#step1").show();
+        connection.trigger("updateButton", {
+          button: "next",
+          enabled: Boolean(getMessage()),
         });
-    }
-
-    function requestedInteractionHandler(settings) {
-        try {
-            eventDefinitionKey = settings.triggers[0].metaData.eventDefinitionKey;
-
-            if (settings.triggers[0].type === 'SalesforceObjectTriggerV2' &&
-                settings.triggers[0].configurationArguments &&
-                settings.triggers[0].configurationArguments.eventDataConfig) {
-
-                var eventDataConfig = settings.triggers[0].configurationArguments.eventDataConfig;
-
-                if (typeof eventDataConfig === 'string') {
-                    eventDataConfig = JSON.parse(eventDataConfig);
-                }
-
-                if (eventDataConfig.objects) {
-                    eventDataConfig.objects.forEach(function(obj) {
-                        obj.fields.forEach(function(field) {
-                            deFields[obj.dePrefix + field] = true;
-                        });
-                    });
-                }
-            }
-        } catch (e) {
-            console.error(e);
-        }
-    }
-
-    function save() {
-        var inArguments = [];
-
-        // Retrieve values from your form fields
-        var testApiKey = $('#firstForm input[name=test-api-key]').val();
-        var liveApiKey = $('#firstForm input[name=live-api-key]').val();
-        var testMode = $('#firstForm input[name=test-mode]').is(':checked');
-        var messageType = $('#secondForm input[name=message-type]:checked').val();
-        var creationType = $('#secondForm input[name=creation-type]:checked').val();
-        var description = $('#secondForm textarea[name=description]').val();
-        var sendDate = $('#thirdForm input[name=send-date]').val();
-        var extraService = $('#thirdForm input[name=extra-service]').val();
-        var mailingClass = $('#thirdForm input[name=mailing-class]').val();
-        var returnEnvelope = $('#thirdForm input[name=return-envelope]').val();
-        var envelopeType = $('#thirdForm input[name=envelope-type]').val();
-
-        // Example of how to structure inArguments
-        inArguments.push({
-            'testApiKey': testApiKey,
-            'liveApiKey': liveApiKey,
-            'testMode': testMode,
-            'messageType': messageType,
-            'creationType': creationType,
-            'description': description,
-            'sendDate': sendDate,
-            'extraService': extraService,
-            'mailingClass': mailingClass,
-            'returnEnvelope': returnEnvelope,
-            'envelopeType': envelopeType
-            // Add other fields as needed
+        connection.trigger("updateButton", {
+          button: "back",
+          visible: false,
         });
-
-        payload['arguments'] = payload['arguments'] || {};
-        payload['arguments'].execute = payload['arguments'].execute || {};
-        payload['arguments'].execute.inArguments = inArguments;
-
-        payload['metaData'] = payload['metaData'] || {};
-        payload['metaData'].isConfigured = true;
-
-        console.log('Saving payload:', payload);
-
-        connection.trigger('updateActivity', payload);
+        break;
+      case "step2":
+        $("#step2").show();
+        connection.trigger("updateButton", {
+          button: "back",
+          visible: true,
+        });
+        connection.trigger("updateButton", {
+          button: "next",
+          text: "next",
+          visible: true,
+        });
+        break;
+      case "step3":
+        $("#step3").show();
+        connection.trigger("updateButton", {
+          button: "back",
+          visible: true,
+        });
+        if (lastStepEnabled) {
+          connection.trigger("updateButton", {
+            button: "next",
+            text: "next",
+            visible: true,
+          });
+        } else {
+          connection.trigger("updateButton", {
+            button: "next",
+            text: "done",
+            visible: true,
+          });
+        }
+        break;
+      case "step4":
+        $("#step4").show();
+        break;
     }
+  }
+
+  function save() {
+    var name = $("#select1").find("option:selected").html();
+    var value = getMessage();
+
+    // 'payload' is initialized on 'initActivity' above.
+    // Journey Builder sends an initial payload with defaults
+    // set by this activity's config.json file.  Any property
+    // may be overridden as desired.
+    payload.name = name;
+
+    payload["arguments"].execute.inArguments = [{ message: value }];
+
+    payload["metaData"].isConfigured = true;
+
+    connection.trigger("updateActivity", payload);
+  }
+
+  function getMessage() {
+    return $("#select1").find("option:selected").attr("value").trim();
+  }
 });
