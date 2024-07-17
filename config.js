@@ -20,6 +20,27 @@ define(["postmonger"], function(Postmonger) {
     function initialize(data) {
         if (data) {
             payload = data;
+            console.log('Payload:', payload);
+            initializeForm();
+        }
+    }
+
+    function initializeForm() {
+        // Populate the form with existing values from payload if needed
+        var inArguments = payload['arguments'] && payload['arguments'].execute && payload['arguments'].execute.inArguments;
+        if (inArguments && inArguments.length > 0) {
+            var args = inArguments[0];
+            $('#firstForm input[name=test-api-key]').val(args.testApiKey);
+            $('#firstForm input[name=live-api-key]').val(args.liveApiKey);
+            $('#firstForm input[name=test-mode]').prop('checked', args.testMode);
+            $('#secondForm input[name=message-type][value=' + args.messageType + ']').prop('checked', true);
+            $('#secondForm input[name=creation-type][value=' + args.creationType + ']').prop('checked', true);
+            $('#secondForm textarea[name=description]').val(args.description);
+            $('#thirdForm input[name=send-date]').val(args.sendDate);
+            $('#thirdForm input[name=extra-service]').val(args.extraService);
+            $('#thirdForm input[name=mailing-class]').val(args.mailingClass);
+            $('#thirdForm input[name=return-envelope]').val(args.returnEnvelope);
+            $('#thirdForm input[name=envelope-type]').val(args.envelopeType);
         }
     }
 
@@ -40,6 +61,28 @@ define(["postmonger"], function(Postmonger) {
     function showStep(stepId) {
         $('.modal').hide();
         $('#' + stepId).show();
+
+        // Show/hide buttons based on current step
+        switch (stepId) {
+            case 'step1':
+                connection.trigger('updateButton', { button: 'back', visible: false });
+                connection.trigger('updateButton', { button: 'next', visible: true });
+                break;
+            case 'step2':
+                connection.trigger('updateButton', { button: 'back', visible: true });
+                connection.trigger('updateButton', { button: 'next', visible: true });
+                break;
+            case 'step3':
+                connection.trigger('updateButton', { button: 'back', visible: true });
+                connection.trigger('updateButton', { button: 'next', visible: true });
+                break;
+            case 'step4':
+                connection.trigger('updateButton', { button: 'back', visible: true });
+                connection.trigger('updateButton', { button: 'next', visible: true });
+                break;
+            default:
+                break;
+        }
     }
 
     function requestedInteractionHandler(settings) {
@@ -73,17 +116,17 @@ define(["postmonger"], function(Postmonger) {
         var inArguments = [];
 
         // Retrieve values from your form fields
-        var testApiKey = $('#test-api-key').val();
-        var liveApiKey = $('#live-api-key').val();
-        var testMode = $('#test-mode').is(':checked');
-        var messageType = $('input[name=message-type]:checked').val();
-        var creationType = $('input[name=creation-type]:checked').val();
-        var description = $('#description').val();
-        var sendDate = $('#send-date').val();
-        var extraService = $('#extra-service').val();
-        var mailingClass = $('#mailing-class').val();
-        var returnEnvelope = $('#return-envelope').val();
-        var envelopeType = $('#envelope-type').val();
+        var testApiKey = $('#firstForm input[name=test-api-key]').val();
+        var liveApiKey = $('#firstForm input[name=live-api-key]').val();
+        var testMode = $('#firstForm input[name=test-mode]').is(':checked');
+        var messageType = $('#secondForm input[name=message-type]:checked').val();
+        var creationType = $('#secondForm input[name=creation-type]:checked').val();
+        var description = $('#secondForm textarea[name=description]').val();
+        var sendDate = $('#thirdForm input[name=send-date]').val();
+        var extraService = $('#thirdForm input[name=extra-service]').val();
+        var mailingClass = $('#thirdForm input[name=mailing-class]').val();
+        var returnEnvelope = $('#thirdForm input[name=return-envelope]').val();
+        var envelopeType = $('#thirdForm input[name=envelope-type]').val();
 
         // Example of how to structure inArguments
         inArguments.push({
@@ -108,7 +151,7 @@ define(["postmonger"], function(Postmonger) {
         payload['metaData'] = payload['metaData'] || {};
         payload['metaData'].isConfigured = true;
 
-        console.log(JSON.stringify(payload));
+        console.log('Saving payload:', payload);
 
         connection.trigger('updateActivity', payload);
     }
