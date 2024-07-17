@@ -16,10 +16,8 @@
       "height": 400,
       "width": 700,
       "fullscreen": true,
-      "buttonAlignment": "horizontal",
-      "buttonText": {
-        "next": "Next",
-        "back": "Back"
+      "buttonAlignment": "horizontal"
+     
       },
       "steps": [
         {
