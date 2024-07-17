@@ -54,35 +54,18 @@ define(["postmonger"], function(Postmonger) {
     }
 
     function onGotoStep(step) {
-        showStep(step);
+        showForm(step); // Use showForm function to display the correct form
         connection.trigger('ready');
     }
 
-    function showStep(stepId) {
-        $('.modal').hide();
-        $('#' + stepId).show();
+    function showForm(formId) {
+        const formIds = [
+            "firstForm", "secondForm", "thirdForm"
+        ];
 
-        // Show/hide buttons based on current step
-        switch (stepId) {
-            case 'step1':
-                connection.trigger('updateButton', { button: 'back', visible: false });
-                connection.trigger('updateButton', { button: 'next', visible: true });
-                break;
-            case 'step2':
-                connection.trigger('updateButton', { button: 'back', visible: true });
-                connection.trigger('updateButton', { button: 'next', visible: true });
-                break;
-            case 'step3':
-                connection.trigger('updateButton', { button: 'back', visible: true });
-                connection.trigger('updateButton', { button: 'next', visible: true });
-                break;
-            case 'step4':
-                connection.trigger('updateButton', { button: 'back', visible: true });
-                connection.trigger('updateButton', { button: 'next', visible: true });
-                break;
-            default:
-                break;
-        }
+        formIds.forEach(id => {
+            document.getElementById(id).style.display = id === formId ? "block" : "none";
+        });
     }
 
     function requestedInteractionHandler(settings) {
