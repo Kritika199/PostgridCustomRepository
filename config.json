@@ -1,86 +1,86 @@
 {
-    "workflowApiVersion": "1.1",
-    "metaData": {
-        "icon": "https://gdm-catalog-fmapi-prod.imgix.net/ProductLogo/35cc11eb-39a9-4dac-948a-24670781c557.png",
-        "category": "message"
-    },
-    "type": "REST",
-    "lang": {
-        "en-US": {
-            "name": "Postgrid Custom Activity",
-            "description": "A custom activity for Postgrid"
-        }
-    },
-    "userInterfaces": {
-        "configModal": {
-            "height": 400,
-            "width": 700,
-            "fullscreen": true,
-            "buttonAlignment": "horizontal",
-            "buttonText": {
-                "next": "Next",
-                "back": "Back"
-            },
-            "steps": [
-                {
-                    "id": "step1",
-                    "title": "Connect your PostGrid account",
-                    "fields": [
-                        {
-                            "id": "test-api-key",
-                            "type": "text",
-                            "label": "Test API Key",
-                            "placeholder": "Enter your test API key",
-                            "required": true
-                        },
-                        {
-                            "id": "live-api-key",
-                            "type": "text",
-                            "label": "Live API Key",
-                            "placeholder": "Enter your live API key",
-                            "required": true
-                        }
-                    ]
-                },
-                {
-                    "id": "step2",
-                    "title": "Choose message settings",
-                    "fields": [
-                        {
-                            "id": "test-mode",
-                            "type": "checkbox",
-                            "label": "Test Mode",
-                            "default": false
-                        },
-                        {
-                            "id": "message-type",
-                            "type": "radio",
-                            "label": "Message Type",
-                            "options": [
-                                { "value": "letters", "label": "Letters", "checked": true },
-                                { "value": "postcards", "label": "Postcards", "checked": false }
-                            ]
-                        },
-                        {
-                            "id": "creation-type",
-                            "type": "radio",
-                            "label": "Creation Type",
-                            "options": [
-                                { "value": "html", "label": "HTML", "checked": true },
-                                { "value": "pdf-upload", "label": "PDF Upload", "checked": false },
-                                { "value": "existing-template", "label": "Existing Template", "checked": false },
-                                { "value": "new-template", "label": "New Template", "checked": false }
-                            ]
-                        }
-                    ]
-                }
-            ]
-        },
-        "runningModal": {
-            "url": "runningModal.html"
-        },
-        "runningHover": {
-            "url": "runningHover.html"
-        }
+  "workflowApiVersion": "1.1",
+  "metaData": {
+    "icon": "https://gdm-catalog-fmapi-prod.imgix.net/ProductLogo/35cc11eb-39a9-4dac-948a-24670781c557.png",
+    "category": "message"
+  },
+  "type": "REST",
+  "lang": {
+    "en-US": {
+      "name": "Postgrid Custom Activity",
+      "description": "A custom activity for Postgrid"
     }
+  },
+  "userInterfaces": {
+    "configModal": {
+      "height": 400,
+      "width": 700,
+      "fullscreen": true,
+      "buttonAlignment": "horizontal",
+      "buttonText": {
+        "next": "Next",
+        "back": "Back"
+      },
+      "steps": [
+        {
+          "id": "firstForm",
+          "title": "Connect your PostGrid account",
+          "fields": [
+            {
+              "id": "test-api-key",
+              "type": "text",
+              "label": "Test API Key",
+              "placeholder": "Enter your test API key",
+              "required": true
+            },
+            {
+              "id": "live-api-key",
+              "type": "text",
+              "label": "Live API Key",
+              "placeholder": "Enter your live API key",
+              "required": true
+            }
+          ]
+        },
+        {
+          "id": "secondForm",
+          "title": "Choose message settings",
+          "fields": [
+            {
+              "id": "test-mode",
+              "type": "checkbox",
+              "label": "Test Mode",
+              "default": false
+            },
+            {
+              "id": "message-type",
+              "type": "radio",
+              "label": "Message Type",
+              "options": [
+                { "value": "letters", "label": "Letters", "checked": true },
+                { "value": "postcards", "label": "Postcards", "checked": false }
+              ]
+            },
+            {
+              "id": "creation-type",
+              "type": "radio",
+              "label": "Creation Type",
+              "options": [
+                { "value": "html", "label": "HTML", "checked": true },
+                { "value": "pdf-upload", "label": "PDF Upload", "checked": false },
+                { "value": "existing-template", "label": "Existing Template", "checked": false },
+                { "value": "new-template", "label": "New Template", "checked": false }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "runningModal": {
+      "url": "runningModal.html"
+    },
+    "runningHover": {
+      "url": "runningHover.html"
+    }
+  }
 }
