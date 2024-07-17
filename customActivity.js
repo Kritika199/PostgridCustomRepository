@@ -76,11 +76,11 @@ define(["postmonger"], function(Postmonger) {
   }
 
   function onGetTokens(tokens) {
-    // console.log(tokens);
+    // Handle tokens if needed
   }
 
   function onGetEndpoints(endpoints) {
-    // console.log(endpoints);
+    // Handle endpoints if needed
   }
 
   function onClickedNext() {
