@@ -4,11 +4,44 @@
     "icon": "https://gdm-catalog-fmapi-prod.imgix.net/ProductLogo/35cc11eb-39a9-4dac-948a-24670781c557.png",
     "category": "message"
   },
+  
   "type": "REST",
   "lang": {
     "en-US": {
       "name": "Postgrid Custom Activity",
       "description": "A custom activity for Postgrid"
+    }
+  },
+  "arguments": {
+    "execute": {
+      "inArguments": [
+        {
+          "emailAddress": "{{InteractionDefaults.Email}}"
+        },
+        {
+          "phoneNumber": "{{Contact.Default.PhoneNumber}}"
+        }
+      ],
+      "outArguments": [
+        {
+          "foundSignupDate": ""
+        }
+      ],
+      "url": "https://some-endpoint.com/execute"
+    }
+  },
+  "configurationArguments": {
+    "save": {
+      "url": "URI/for/your/activity/save"
+    },
+    "publish": {
+      "url": "URI/for/your/activity/publish"
+    },
+    "validate": {
+      "url": "URI/for/your/activity/validate"
+    },
+    "stop": {
+      "url": "URI/for/your/activity/stop"
     }
   },
   "userInterfaces": {
