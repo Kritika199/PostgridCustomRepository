@@ -2,7 +2,7 @@
     "workflowApiVersion": "1.1",
     "metaData": {
         "icon": "https://gdm-catalog-fmapi-prod.imgix.net/ProductLogo/35cc11eb-39a9-4dac-948a-24670781c557.png",
-        "category": "Custom"
+         "category": "message"
        
     },
     "type": "REST",
@@ -16,7 +16,11 @@
         "configModal": {
             "height": 400,
             "width": 700,
-            "fullscreen": true
+            "fullscreen": true,
+            "buttonAlignment": "horizontal",
+            "buttonText": {
+                "next": "Next",
+                "back": "Back"
             
             "steps": [
                 {
