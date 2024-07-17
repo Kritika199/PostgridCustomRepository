@@ -1,14 +1,21 @@
-function showSecondForm() {
-    $('#firstForm').hide();
-    $('#secondForm').show();
-}
+function showForm(formId) {
+    const formIds = [
+        "firstForm", "secondForm", "thirdForm"
+    ];
 
-function showThirdForm() {
-    $('#secondForm').hide();
-    $('#thirdForm').show();
+    formIds.forEach(id => {
+        document.getElementById(id).style.display = id === formId ? "block" : "none";
+    });
 }
 
 function showFirstForm() {
-    $('#thirdForm').hide();
-    $('#firstForm').show();
+    showForm("firstForm");
+}
+
+function showSecondForm() {
+    showForm("secondForm");
+}
+
+function showThirdForm() {
+    showForm("thirdForm");
 }
