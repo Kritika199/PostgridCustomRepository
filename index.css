@@ -95,7 +95,10 @@ h4 {
     background-color: #f0f0f0;
 }
 
-button {
+/* Adjustments for Button Styling */
+.cancel,
+.back,
+.next {
     padding: 10px 20px;
     font-size: 16px;
     border: none;
@@ -108,12 +111,8 @@ button {
     color: rgb(51, 53, 56);
 }
 
-.nav-buttons button {
-    margin-left: 10px;
-}
-
 .back {
-    background-color: none;
+    background-color: transparent; /* Changed from 'none' to 'transparent' */
     color: rgb(7, 117, 227);
 }
 
@@ -121,6 +120,13 @@ button {
     background-color: rgb(10, 115, 236);
     color: white;
 }
+
+/* Ensure Navigation Buttons are Aligned */
+.nav-buttons .back,
+.nav-buttons .next {
+    margin-left: 10px;
+}
+
 
 .form-group {
     margin-bottom: 30px;
