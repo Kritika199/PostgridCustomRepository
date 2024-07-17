@@ -107,7 +107,7 @@ define(["postmonger"], function(Postmonger) {
 
     currentStep = step.key;
 
-    $(".step").hide();
+    $(".modal").hide();
 
     switch (currentStep) {
       case "firstForm":
