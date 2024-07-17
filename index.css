@@ -59,7 +59,8 @@ h4 {
 
 .form-section input[type="text"],
 .form-section input[type="radio"],
-.form-section input[type="checkbox"] {
+.form-section input[type="checkbox"],
+.form-section select {
     width: 100%;
     padding: 10px;
     font-size: 16px;
@@ -95,10 +96,7 @@ h4 {
     background-color: #f0f0f0;
 }
 
-/* Adjustments for Button Styling */
-.cancel,
-.back,
-.next {
+button {
     padding: 10px 20px;
     font-size: 16px;
     border: none;
@@ -111,8 +109,12 @@ h4 {
     color: rgb(51, 53, 56);
 }
 
+.nav-buttons button {
+    margin-left: 10px;
+}
+
 .back {
-    background-color: transparent; /* Changed from 'none' to 'transparent' */
+    background-color: none;
     color: rgb(7, 117, 227);
 }
 
@@ -121,24 +123,18 @@ h4 {
     color: white;
 }
 
-/* Ensure Navigation Buttons are Aligned */
-.nav-buttons .back,
-.nav-buttons .next {
-    margin-left: 10px;
-}
-
-
 .form-group {
     margin-bottom: 30px;
 }
 
 .radio-group {
     display: flex; /* Display radio buttons in a row */
-    align-items: center; /* Center align items vertically */
+    align-items: center;
 }
 
-.radio-group input[type="radio"] {
-    margin-right: 10px; /* Adjust spacing between radio buttons */
+.radio-group label {
+    margin-right: 30px;
+    white-space: nowrap; /* Adjust spacing between labels */
 }
 
 /* Toggle switch styles */
@@ -146,8 +142,8 @@ h4 {
     position: absolute;
     top: 40px; /* Adjust top position as needed */
     right: 40px; /* Adjust right position as needed */
-   
 }
+
 .toggle-switch {
     position: relative;
     display: inline-block;
@@ -176,3 +172,120 @@ h4 {
 .toggle-checkbox:checked + .toggle-label {
     transform: translateX(20px);
 }
+
+/* Styling for Form Details Section */
+.modal-content {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 20px;
+    background-color: #fff;
+    width: 1000px;
+    margin: 0 auto;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+
+.html-editor {
+    width: 105%; /* Full width */
+    
+   
+    /* Position relative for any positioning */
+    text-align: right;
+    margin-left: 50%; /* Align to the right */
+}
+
+
+.modal-content1,
+.modal-content2,
+.modal-content3,
+.modal-content4 {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #fff;
+    padding: 20px;
+    border: 1px solid #ccc;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    z-index: 1000;
+    max-width: 90%;
+}
+
+.modal-content1,
+.modal-content4 {
+    width: 800px; /* Adjust width as needed */
+}
+
+.modal-content2,
+.modal-content3 {
+    width: 1000px; /* Adjust width as needed */
+}
+
+.grid-form,
+.grid-form1 {
+    display: grid;
+    gap: 20px; /* Gap between grid items */
+}
+
+.grid-form {
+    grid-template-columns: 1fr 1fr; /* Two equal columns */
+}
+
+.grid-form1 {
+    grid-template-columns: 2fr 2fr; /* Two equal columns */
+}
+
+.upload-section {
+    margin-top: 15px;
+    margin-bottom: 30px;
+    padding: 20px;
+    text-align: center;
+    border-radius: 10px; /* Rounded corners */
+    border: 5px dashed #c5cad0; /* Dashed border in blue color */
+}
+
+.upload-section p {
+    margin-bottom: 10px;
+}
+
+.template-editor {
+    position: relative; /* Position the element relatively within the container */
+    width:50%; /* Full width */
+    
+}
+
+.left-section,
+.right-section {
+    flex: 1;
+    padding: 20px;
+}
+
+.partition {
+    width: 1px;
+    background-color: #ccc;
+    height: auto;
+    margin: 0 20px;
+}
+
+/* Modal Content */
+.modal-content0 {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000; /* Ensure it's above other content */
+    width: 100%; /* Adjust width as needed */
+    max-width: 800px; /* Maximum width for larger screens */
+}
+
+@media (max-width: 768px) {
+    .modal-content0 {
+        width: 90%; /* Adjust width for smaller screens */
+    }
+}
+
+
